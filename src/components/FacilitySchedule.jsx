@@ -8,7 +8,6 @@ import {
   Col, 
   Button, 
   Space,
-  Divider,
   Badge,
   Avatar,
   Tooltip,
@@ -34,7 +33,6 @@ import {
 } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import { facilities, employees, initialSchedule } from '../data/mockData';
-import { Facility, Employee, ShiftSchedule } from '../types';
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
@@ -42,13 +40,13 @@ const { Option } = Select;
 const { Panel } = Collapse;
 const { Search } = Input;
 
-const FacilitySchedule: React.FC = () => {
-  const [schedule, setSchedule] = useState<ShiftSchedule>(initialSchedule);
+const FacilitySchedule = () => {
+  const [schedule, setSchedule] = useState(initialSchedule);
   const [selectedWeek, setSelectedWeek] = useState(dayjs());
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeKeys, setActiveKeys] = useState<string[]>(['Kitchen', 'Service', 'Administration', 'Bar']);
+  const [activeKeys, setActiveKeys] = useState(['Kitchen', 'Service', 'Administration', 'Bar']);
 
-  const getDepartmentIcon = (type: string) => {
+  const getDepartmentIcon = (type) => {
     switch (type) {
       case 'kitchen': return <CoffeeOutlined />;
       case 'service': return <TeamOutlined />;
@@ -58,7 +56,7 @@ const FacilitySchedule: React.FC = () => {
     }
   };
 
-  const getDepartmentColor = (type: string) => {
+  const getDepartmentColor = (type) => {
     switch (type) {
       case 'kitchen': return '#52c41a';
       case 'service': return '#1890ff';
@@ -75,16 +73,11 @@ const FacilitySchedule: React.FC = () => {
     );
   };
 
-  const getEmployeesByDepartment = (department: string) => {
+  const getEmployeesByDepartment = (department) => {
     return employees.filter(emp => emp.department === department);
   };
 
-  const updateSchedule = (
-    facilityId: string, 
-    date: string, 
-    shift: 'morning' | 'evening', 
-    employeeId: string
-  ) => {
+  const updateSchedule = (facilityId, date, shift, employeeId) => {
     setSchedule(prev => ({
       ...prev,
       [date]: {
@@ -97,7 +90,7 @@ const FacilitySchedule: React.FC = () => {
     }));
   };
 
-  const getEmployeeName = (employeeId: string) => {
+  const getEmployeeName = (employeeId) => {
     const employee = employees.find(emp => emp.id === employeeId);
     return employee?.name || 'Unassigned';
   };
@@ -115,7 +108,7 @@ const FacilitySchedule: React.FC = () => {
         const newSchedule = { ...schedule };
         
         // Track employee assignments to avoid conflicts
-        const employeeAssignments: { [date: string]: { [employeeId: string]: string[] } } = {};
+        const employeeAssignments = {};
         
         weekDays.forEach(day => {
           const dateStr = day.format('YYYY-MM-DD');
@@ -199,7 +192,7 @@ const FacilitySchedule: React.FC = () => {
     }
     acc[facility.department].push(facility);
     return acc;
-  }, {} as Record<string, Facility[]>);
+  }, {});
 
   const weekDays = getWeekDays();
 

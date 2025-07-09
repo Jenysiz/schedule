@@ -1,6 +1,4 @@
-import { Facility, Employee, ShiftSchedule } from '../types';
-
-export const facilities: Facility[] = [
+export const facilities = [
   // Kitchen Facilities
   { id: 'kitchen-1', name: 'Main Kitchen', department: 'Kitchen', capacity: 8, type: 'kitchen' },
   { id: 'kitchen-2', name: 'Prep Station', department: 'Kitchen', capacity: 4, type: 'kitchen' },
@@ -20,7 +18,7 @@ export const facilities: Facility[] = [
   { id: 'bar-2', name: 'Cocktail Lounge', department: 'Bar', capacity: 4, type: 'bar' },
 ];
 
-export const employees: Employee[] = [
+export const employees = [
   // Kitchen Staff
   { id: 'emp-1', name: 'Amanda Johnson', role: 'Sous Chef', department: 'Kitchen' },
   { id: 'emp-2', name: 'Ella Harper', role: 'Line Cook', department: 'Kitchen' },
@@ -43,7 +41,7 @@ export const employees: Employee[] = [
   { id: 'emp-13', name: 'Maya Rodriguez', role: 'Bar Back', department: 'Bar' },
 ];
 
-export const initialSchedule: ShiftSchedule = {
+export const initialSchedule = {
   '2024-01-22': {
     'kitchen-1': { morning: 'emp-1', evening: 'emp-2' },
     'kitchen-2': { morning: 'emp-3', evening: 'emp-4' },
